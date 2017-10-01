@@ -177,6 +177,19 @@ class PostsController extends Controller
 		}
         $post->save();
 		
+		if($request->has('res'))
+		{
+			$adress = $request->input('res');
+			foreach ($adress as $adr)
+			{
+				$res = new CloudinaryRes;
+				$res->post_id = $post->id;  
+				$res->resURL = $adr;
+				$res->save();
+			}
+		}
+		
+		
 		return redirect('/posts')->with('success','Post Updated');
 	}
 

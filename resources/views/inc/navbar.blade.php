@@ -43,6 +43,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="/home">Dashboard</a></li>
+                            <li><a href="/users/{{auth()->user()->id}}/edit">Edit Profile</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

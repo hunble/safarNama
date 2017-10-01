@@ -13,6 +13,10 @@
             {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
         </div>
         <div class="form-group">
+            {{Form::label('destination', 'Destination')}}
+            {{Form::text('destination', '', ['class' => 'form-control', 'placeholder' => 'Destination'])}}
+        </div>
+        <div class="form-group">
             {{Form::label('body', 'Body')}}
             {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
         </div>

@@ -14,7 +14,7 @@ class Comment extends Model
     public $timestamps = true;
 
 	
-        public function post(){
+    public function post(){
         return $this->belongsTo('App\Post');
     }
 }

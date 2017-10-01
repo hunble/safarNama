@@ -3,6 +3,8 @@
 @section('content')
     <a href="/posts" class="btn btn-default">Go Back</a>
     <h1>{{$post->title}}</h1>
+    <h6>{{$post->destination}}</h6>
+	
 	<div class='row'>
 		<div class="col-md-6">
 			<img style="width:100%" src="/storage/cover_images/{{$post->cover_image}}">
@@ -22,12 +24,12 @@
 				@foreach($cloudinaryRes as $cRes)
 					@if (strpos($cRes,"image")!== false)
 						<div class="col-md-6">
-							<img src="{{$cRes->resURL}}"></img>
+							<img src="{{$cRes->resURL}}" height="400" width="400"></img><br><br>
 						</div>            
 					@elseif(strpos($cRes,"video")!== false)
 						<div class="col-md-6">
-							<video controls>
-								<source src="{{$cRes->resURL}}" type="video/mp4">
+							<video width="400" height="400" controls autoplay>
+								<source src="{{$cRes->resURL}}" type="video/mp4"><br><br>
 							</video>
 						</div>            
 					@endif
@@ -40,11 +42,13 @@
 	</div>
 
     <hr>
-    <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
-    <hr>
+    <small>Written on {{$post->created_at}} by {{$post->user->public_name}}</small>
+    
     @if(!Auth::guest())
         @if(Auth::user()->id == $post->user_id)
             <a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
+		@endif
+        @if(Auth::user()->id == $post->user_id || Auth::user()->is_admin == true)
 
             {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                 {{Form::hidden('_method', 'DELETE')}}
@@ -52,7 +56,8 @@
             {!!Form::close()!!}
         @endif
     @endif
-
+	<hr>
+	<div class="container">
 	<h2>Comments</h2>
     @if(count($comments) > 0)
         @foreach($comments as $comment)
@@ -62,13 +67,20 @@
 					<small>on {{$post->created_at}}</small>
 					<hr>
 					<p>{!!$comment->body!!}</p>
+					@if(auth()->user()->is_admin == true)
+					<hr>
+						{!!Form::open(['action' => ['CommentsController@destroy', $comment->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+							{{Form::hidden('_method', 'DELETE')}}
+							{{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+						{!!Form::close()!!}
+					@endif
 				</div>            
 			</div>
         @endforeach
     @else
         <p>No posts found</p>
     @endif
-	
+	</div>
     <h3>Create Comment</h3>
     {!! Form::open(['action' => 'CommentsController@store', 'method' => 'POST']) !!}
         <div class="form-group">

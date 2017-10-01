@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CloudinaryRes extends Model
 {
-    //
+    public function post(){
+        return $this->belongsTo('App\Post');
+    }
 }

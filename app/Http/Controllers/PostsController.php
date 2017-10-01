@@ -50,6 +50,7 @@ class PostsController extends Controller
 		$this->validate($request,[
 			'title' => 'required',
 			'body' => 'required',
+			'destination' => 'required',
 			'cover_image' => 'image|nullable|max:1999'
 		]);
 		
@@ -72,6 +73,7 @@ class PostsController extends Controller
 		$post = new Post;
 		$post->title = $request->input('title');
 		$post->body = $request->input('body');
+		$post->destination = $request->input('destination');
 		$post->user_id = auth()->user()->id;
 		$post->cover_image = $fileNameToStore;
 		$post->save();
@@ -102,6 +104,8 @@ class PostsController extends Controller
         $post = Post::find($id);
 		$comments = Comment::where('post_id',$id)->get();
 		$cloudinaryRes = CloudinaryRes::where('post_id',$id)->get();
+	
+		//return $cloudinaryRes;
 		return view('posts.show')->with(['post'=>$post,'comments'=>$comments,'cloudinaryRes'=>$cloudinaryRes]);
     }
 
@@ -114,13 +118,14 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-
+		$cloudinaryRes = CloudinaryRes::where('post_id',$id)->get();
+		
 		// Check for correct user
         if(auth()->user()->id !==$post->user_id){
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
 
-			return view('posts.edit')->with('post',$post);
+		return view('posts.edit')->with(['post'=>$post,'cloudinaryRes'=>$cloudinaryRes]);
 
 	}
 
@@ -136,6 +141,7 @@ class PostsController extends Controller
 		$this->validate($request,[
 			'title' => 'required',
 			'body' => 'required',
+			'destination' => 'required',
 			'cover_image' => 'image|nullable|max:1999'
 
 		]);
@@ -159,10 +165,9 @@ class PostsController extends Controller
         $post = Post::find($id);
 
 
-
-
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+        $post->destination = $request->input('destination');
         if($request->hasFile('cover_image')){
 			if($post->cover_image != 'no-image.jpg'){
 				// Delete Image
@@ -186,7 +191,9 @@ class PostsController extends Controller
 		$post = Post::find($id);
 		// Check for correct user
         if(auth()->user()->id !==$post->user_id){
-            return redirect('/posts')->with('error', 'Unauthorized Page');
+			if(auth()->user()->is_admin !== true){
+				return redirect('/posts')->with('error', 'Unauthorized Page');
+			}
         }
 		
         if($post->cover_image != 'no-image.jpg'){

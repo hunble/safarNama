@@ -1,23 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-use App\Comment;
-
-class CommentsController extends Controller
+use App\CloudinaryRes;
+use App\Post;
+use App\User;
+class CloudinaryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-	 
     public function index()
     {
         //
@@ -30,7 +24,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        return view('comments.create');
+        //
     }
 
     /**
@@ -41,18 +35,8 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-		$this->validate($request,[
-			'Commenter' => 'required',
-			'body' => 'required',
-			'post_id' => 'required'
-		]);
-		$comment = new Comment;
-		$comment->Commenter = $request->input('Commenter');
-		$comment->body = $request->input('body');
-		$comment->post_id = $request->input('post_id');
-		$comment->save();
-		
-		return redirect('/posts')->with('success','Comment Posted');    }
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -62,8 +46,7 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
-        $comment = Comment::where('post_id',$id)->get();
-		return $comment;
+        //
     }
 
     /**
@@ -97,14 +80,17 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-		$comment = Comment::find($id);
+		$cloudinary = CloudinaryRes::find($id);
+		$post = Post::find($cloudinary->post_id);
+		
 		// Check for correct user
-        if(auth()->user()->is_admin !== true){
-            return redirect('/posts')->with('error', 'Unauthorized Page');
+        if(auth()->user()->id !==$post->user_id){
+			if(auth()->user()->is_admin !== true){
+				return redirect('/posts')->with('error', 'Unauthorized Page');
+			}
         }
 		
-		$comment->delete();
-		return redirect('/posts')->with('success','Comment Deleted');
+		$cloudinary->delete();
+		return redirect('/posts')->with('success','Res Deleted');
     }
-
 }

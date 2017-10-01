@@ -25,9 +25,11 @@ Route::get('/about','PagesController@about');
 Route::get('/services','PagesController@services');
 
 
+
 Route::resource('posts','PostsController');
 Route::resource('comments','CommentsController');
-
+Route::resource('users','UsersController');
+Route::resource('cloudinaryRes','CloudinaryController');
 
 
 Auth::routes();

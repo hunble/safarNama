@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 use App\Post;
+use App\Comment;
+use App\CloudinaryRes;
 
 class PostsController extends Controller
 {
@@ -45,13 +49,44 @@ class PostsController extends Controller
     {
 		$this->validate($request,[
 			'title' => 'required',
-			'body' => 'required'
+			'body' => 'required',
+			'cover_image' => 'image|nullable|max:1999'
 		]);
+		
+        // Handle File Upload
+        if($request->hasFile('cover_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'no-image.jpg';
+        }		
+				
 		$post = new Post;
 		$post->title = $request->input('title');
 		$post->body = $request->input('body');
 		$post->user_id = auth()->user()->id;
+		$post->cover_image = $fileNameToStore;
 		$post->save();
+
+		if($request->has('res'))
+		{
+			$adress = $request->input('res');
+			foreach ($adress as $adr)
+			{
+				$res = new CloudinaryRes;
+				$res->post_id = $post->id;  
+				$res->resURL = $adr;
+				$res->save();
+			}
+		}
 		
 		return redirect('/posts')->with('success','Post Created');
     }
@@ -65,7 +100,9 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-		return view('posts.show')->with('post',$post);
+		$comments = Comment::where('post_id',$id)->get();
+		$cloudinaryRes = CloudinaryRes::where('post_id',$id)->get();
+		return view('posts.show')->with(['post'=>$post,'comments'=>$comments,'cloudinaryRes'=>$cloudinaryRes]);
     }
 
     /**
@@ -98,12 +135,42 @@ class PostsController extends Controller
     {
 		$this->validate($request,[
 			'title' => 'required',
-			'body' => 'required'
+			'body' => 'required',
+			'cover_image' => 'image|nullable|max:1999'
+
 		]);
-		$post = Post::find($id);
-		$post->title = $request->input('title');
-		$post->body = $request->input('body');
-		$post->save();
+		
+		
+         // Handle File Upload
+        if($request->hasFile('cover_image')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        }
+		
+        // Create Post
+        $post = Post::find($id);
+
+
+
+
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        if($request->hasFile('cover_image')){
+			if($post->cover_image != 'no-image.jpg'){
+				// Delete Image
+				Storage::delete('public/cover_images/'.$post->cover_image);
+			}
+			$post->cover_image = $fileNameToStore;
+		}
+        $post->save();
 		
 		return redirect('/posts')->with('success','Post Updated');
 	}
@@ -121,8 +188,15 @@ class PostsController extends Controller
         if(auth()->user()->id !==$post->user_id){
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
-		      
 		
+        if($post->cover_image != 'no-image.jpg'){
+            // Delete Image
+            Storage::delete('public/cover_images/'.$post->cover_image);
+        }		
+		
+		Comment::where('post_id', $id)->delete();
+		CloudinaryRes::where('post_id', $id)->delete();
+
 		$post->delete();
 		return redirect('/posts')->with('success','Post Deleted');
     }

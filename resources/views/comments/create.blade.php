@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
-
-
-
     <h1>Create Post</h1>
     {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">
@@ -17,15 +12,8 @@
             {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
         </div>
         <div class="form-group">
-            {{Form::label('cover_image', 'Cover Image')}}
-			{{Form::file('cover_image')}}
+            {{Form::file('cover_image')}}
         </div>
-		<div class="form-group">
-			<a href="#" id="upload_widget_opener">Upload multiple images</a>
-		</div>
-		<div id="Added_Resources">
-		</div>
         {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
-
 @endsection

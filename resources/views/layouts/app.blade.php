@@ -21,7 +21,7 @@
 			@yield('content')
 		</div>
     </div>
-
+	
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
@@ -29,5 +29,28 @@
         CKEDITOR.replace( 'article-ckeditor' );
     </script>	
 
+	<!--Cloudinary-->
+	<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"> </script>
+	<script>
+	  cloudinary.setCloudName('hmxs40u75');
+	</script>
+	<script type="text/javascript"> 
+	cloudinary.applyUploadWidget(document.getElementById('upload_widget_opener'), 
+	  { upload_preset: 'aodkpzx9' }, 
+	  function(error, result) {console.log(error, result)
+		for (i = 0; i < result.length; i++) { 
+			Added_Resources = document.getElementById('Added_Resources');
+			
+			var res = document.createElement("input");
+			res.setAttribute("value",result[i]['secure_url']);
+			res.setAttribute("name", "res[]");
+			res.setAttribute("type", "hidden")
+			Added_Resources.appendChild(res);
+			
+		}
+	  
+	  });
+	</script>
+	
 </body>
 </html>

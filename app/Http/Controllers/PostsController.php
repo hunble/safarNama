@@ -10,8 +10,8 @@ use App\Comment;
 use App\CloudinaryRes;
 
 //Cloudinary Admin API
-require "\Utility\cloudinary_php-master\src\cloudinary.php";
-require "\Utility\cloudinary_php-master\src\api.php";
+require "Utility\cloudinary_php-master\src\Cloudinary.php";
+require "Utility\cloudinary_php-master\src\Api.php";
 
 
 class PostsController extends Controller

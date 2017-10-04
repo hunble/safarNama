@@ -23,6 +23,10 @@
 		</div>
 		<div id="Added_Resources">
 		</div>
+		<div id="Added_Resources_public_id">
+		</div>
+		<div id="Added_Resources_resource_type">
+		</div>
 		
         {{Form::hidden('_method','PUT')}}
         {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}

@@ -29,6 +29,10 @@
 		</div>
 		<div id="Added_Resources">
 		</div>
+		<div id="Added_Resources_public_id">
+		</div>		
+		<div id="Added_Resources_resource_type">
+		</div>
         {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
 

@@ -47,6 +47,22 @@
 			res.setAttribute("type", "hidden")
 			Added_Resources.appendChild(res);
 			
+			Added_Resources_public_id = document.getElementById('Added_Resources_public_id');
+			
+			var res = document.createElement("input");
+			res.setAttribute("value",result[i]['public_id']);
+			res.setAttribute("name", "res_public_id[]");
+			res.setAttribute("type", "hidden")
+			Added_Resources_public_id.appendChild(res);
+
+			Added_Resources_resource_type = document.getElementById('Added_Resources_resource_type');
+			
+			var res = document.createElement("input");
+			res.setAttribute("value",result[i]['resource_type']);
+			res.setAttribute("name", "res_resource_type[]");
+			res.setAttribute("type", "hidden")
+			Added_Resources_resource_type.appendChild(res);
+			
 		}
 	  
 	  });

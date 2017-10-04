@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+
+//Cloudinary Admin API
+require "Utility\cloudinary_php-master\src\cloudinary.php";
+require "Utility\cloudinary_php-master\src\api.php";
+
 use App\CloudinaryRes;
 use App\Post;
 use App\User;
@@ -14,7 +19,19 @@ class CloudinaryController extends Controller
      */
     public function index()
     {
-        //
+
+		\Cloudinary::config(array( 
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "818238713846353", 
+			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+		));
+
+
+
+		$api = new \Cloudinary\Api();
+		return array($api->resources(),$api->resources(array("resource_type" => "video")));
+		return $result;
+		
     }
 
     /**
@@ -90,7 +107,17 @@ class CloudinaryController extends Controller
 			}
         }
 		
+		\Cloudinary::config(array( 
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "818238713846353", 
+			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+		));
+		
+		$api = new \Cloudinary\Api();
+		$api->delete_resources(array($cloudinary->public_id), array("resource_type" => $cloudinary->resource_type));	
+
+		
 		$cloudinary->delete();
-		return redirect('/posts')->with('success','Res Deleted');
+		return redirect('/posts')->with('success','Resource Successfully Deleted');
     }
 }

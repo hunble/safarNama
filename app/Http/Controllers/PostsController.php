@@ -9,6 +9,11 @@ use App\Post;
 use App\Comment;
 use App\CloudinaryRes;
 
+//Cloudinary Admin API
+require "Utility\cloudinary_php-master\src\cloudinary.php";
+require "Utility\cloudinary_php-master\src\api.php";
+
+
 class PostsController extends Controller
 {
     /**
@@ -53,7 +58,8 @@ class PostsController extends Controller
 			'destination' => 'required',
 			'cover_image' => 'image|nullable|max:1999'
 		]);
-		
+	
+
         // Handle File Upload
         if($request->hasFile('cover_image')){
             // Get filename with the extension
@@ -78,17 +84,26 @@ class PostsController extends Controller
 		$post->cover_image = $fileNameToStore;
 		$post->save();
 
-		if($request->has('res'))
+		//Enter Cloudinary ressource
+		if($request->has('res')&&$request->has('res_public_id')&&$request->has('res_resource_type'))
 		{
 			$adress = $request->input('res');
-			foreach ($adress as $adr)
+			$res_public_id = $request->input('res_public_id');
+			$res_resource_type = $request->input('res_resource_type');
+			$i=0;
+			foreach (array_combine($res_public_id,$adress) as $pub => $adr)	
 			{
+				$res_type = $res_resource_type[$i++];
 				$res = new CloudinaryRes;
 				$res->post_id = $post->id;  
 				$res->resURL = $adr;
+				$res->public_id = $pub;
+				$res->resource_type = $res_type;
 				$res->save();
 			}
 		}
+
+
 		
 		return redirect('/posts')->with('success','Post Created');
     }
@@ -143,10 +158,9 @@ class PostsController extends Controller
 			'body' => 'required',
 			'destination' => 'required',
 			'cover_image' => 'image|nullable|max:1999'
-
 		]);
 		
-		
+				
          // Handle File Upload
         if($request->hasFile('cover_image')){
             // Get filename with the extension
@@ -177,18 +191,27 @@ class PostsController extends Controller
 		}
         $post->save();
 		
-		if($request->has('res'))
+		//Enter Cloudinary ressource
+		if($request->has('res')&&$request->has('res_public_id')&&$request->has('res_resource_type'))
 		{
 			$adress = $request->input('res');
-			foreach ($adress as $adr)
+			$res_public_id = $request->input('res_public_id');
+			$res_resource_type = $request->input('res_resource_type');
+			$i=0;
+			foreach (array_combine($res_public_id,$adress) as $pub => $adr)	
 			{
+				$res_type = $res_resource_type[$i++];
 				$res = new CloudinaryRes;
 				$res->post_id = $post->id;  
 				$res->resURL = $adr;
+				$res->public_id = $pub;
+				$res->resource_type = $res_type;
 				$res->save();
 			}
 		}
+
 		
+
 		
 		return redirect('/posts')->with('success','Post Updated');
 	}
@@ -215,6 +238,25 @@ class PostsController extends Controller
         }		
 		
 		Comment::where('post_id', $id)->delete();
+		
+		//Delete Res form Cloudinary
+		\Cloudinary::config(array( 
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "818238713846353", 
+			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+		));
+		
+		$api = new \Cloudinary\Api();
+
+		$cRes = CloudinaryRes::where('post_id', $id)->get();
+
+		
+		foreach ($cRes as $cr)
+		{
+			$api->delete_resources(array($cr->public_id), array("resource_type" => $cr->resource_type));	
+		}
+
+		
 		CloudinaryRes::where('post_id', $id)->delete();
 
 		$post->delete();

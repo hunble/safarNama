@@ -67,12 +67,14 @@
 					<small>on {{$post->created_at}}</small>
 					<hr>
 					<p>{!!$comment->body!!}</p>
-					@if(auth()->user()->is_admin == true)
-					<hr>
-						{!!Form::open(['action' => ['CommentsController@destroy', $comment->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
-							{{Form::hidden('_method', 'DELETE')}}
-							{{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-						{!!Form::close()!!}
+					@if(!Auth::guest())
+						@if(auth()->user()->is_admin == true)
+						<hr>
+							{!!Form::open(['action' => ['CommentsController@destroy', $comment->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+								{{Form::hidden('_method', 'DELETE')}}
+								{{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+							{!!Form::close()!!}
+						@endif
 					@endif
 				</div>            
 			</div>

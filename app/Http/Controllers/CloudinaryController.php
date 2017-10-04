@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 //Cloudinary Admin API
-require "Utility\cloudinary_php-master\src\cloudinary.php";
-require "Utility\cloudinary_php-master\src\api.php";
+require "\Utility\cloudinary_php-master\src\cloudinary.php";
+require "\Utility\cloudinary_php-master\src\api.php";
 
 use App\CloudinaryRes;
 use App\Post;

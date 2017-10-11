@@ -14,6 +14,9 @@
                         </div>
                     @endif
                     <a href="/posts/create" class="btn btn-primary">Create Post</a>
+                    @if(Auth::user()->id == $post->user_id || Auth::user()->is_admin == true)
+						<a href="/users" class="btn btn-primary">Manage Users</a>
+					@endif
                     <h3>Your Blog Posts</h3>
                     @if(count($posts) > 0)
                         <table class="table table-striped">

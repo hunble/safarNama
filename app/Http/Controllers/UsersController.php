@@ -148,14 +148,9 @@ class UsersController extends Controller
 		$posts =Post::where('user_id',$id)->get();
 		foreach ($posts as $post)
 		{
-			if($post->cover_image != 'no-image.jpg'){
-				// Delete Image
-				Storage::delete('public/cover_images/'.$post->cover_image);
-			}		
-			Comment::where('post_id', $post->id)->delete();
-			CloudinaryRes::where('post_id', $post->id)->delete();
+			PostsController.destroy($post->id);
 		}
-		Post::where('user_id',$id)->delete();
+
 		$user->delete();
 		return redirect('/users')->with('success','User Deleted');
 	}

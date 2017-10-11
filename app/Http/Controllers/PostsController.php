@@ -59,29 +59,25 @@ class PostsController extends Controller
 		]);
 	
 
-        // Handle File Upload
-        if($request->hasFile('cover_image')){
-            // Get filename with the extension
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-			Storage::setVisibility($fileNameToStore, 'public');
-        } else {
-            $fileNameToStore = 'no-image.jpg';
-        }		
+		//Hnadle Cove image
+		\Cloudinary::config(array( 
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "818238713846353", 
+			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+		));
+		$temp = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
+		$fileNameToStore = json_decode($temp);
+		$fileNameToStore = $temp2->{'secure_url'};
+		$fileNameToStore2 = $temp2->{'public_id'};
+		
 				
 		$post = new Post;
 		$post->title = $request->input('title');
 		$post->body = $request->input('body');
 		$post->destination = $request->input('destination');
 		$post->user_id = auth()->user()->id;
-		$post->cover_image = $fileNameToStore;
+		$post->cover_image = $fileNameToStore->{'secure_url'};
+		$post->cover_public_id = $fileNameToStore->{'secure_url'};
 		$post->save();
 
 		//Enter Cloudinary ressource
@@ -161,21 +157,16 @@ class PostsController extends Controller
 		]);
 		
 				
-         // Handle File Upload
-        if($request->hasFile('cover_image')){
-            // Get filename with the extension
-            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('cover_image')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-			Storage::setVisibility($fileNameToStore, 'public');
-        }
-		
+		//Hnadle Cove image
+		\Cloudinary::config(array( 
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "818238713846353", 
+			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+		));
+		$temp = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
+		$fileNameToStore = json_decode($temp);
+		$fileNameToStore = $temp2->{'secure_url'};
+		$fileNameToStore2 = $temp2->{'public_id'};
         // Create Post
         $post = Post::find($id);
 

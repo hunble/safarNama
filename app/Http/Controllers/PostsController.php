@@ -58,25 +58,31 @@ class PostsController extends Controller
 			'cover_image' => 'image|nullable|max:1999'
 		]);
 	
+	
+	
+	
+        // Handle File Upload
+        if($request->hasFile('cover_image')){
+			//Hnadle Cove image
+			\Cloudinary::config(array( 
+				"cloud_name" => "hmxs40u75", 
+				"api_key" => "818238713846353", 
+				"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+			));
+			
+			$fileNameToStore = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
+        } else {
+			$fileNameToStore = array('secure_url'=>'https://res.cloudinary.com/hmxs40u75/image/upload/v1507740979/cover_images/no-image_e4gwqf.jpg','public_id'=>'cover_images/no-image_e4gwqf'); 
+		}
 
-		//Hnadle Cove image
-		\Cloudinary::config(array( 
-			"cloud_name" => "hmxs40u75", 
-			"api_key" => "818238713846353", 
-			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
-		));
-		$temp = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
-		$fileNameToStore = $temp->{'secure_url'};
-		$fileNameToStore2 = $temp->{'public_id'};
 		
-				
 		$post = new Post;
 		$post->title = $request->input('title');
 		$post->body = $request->input('body');
 		$post->destination = $request->input('destination');
 		$post->user_id = auth()->user()->id;
-		$post->cover_image = $fileNameToStore->{'secure_url'};
-		$post->cover_public_id = $fileNameToStore->{'secure_url'};
+		$post->cover_image = $fileNameToStore['secure_url'];
+		$post->cover_public_id = $fileNameToStore['public_id'];
 		$post->save();
 
 		//Enter Cloudinary ressource
@@ -148,6 +154,8 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+		if(set_time_limit ( 20 )){}
+		else return "max time not set";
 		$this->validate($request,[
 			'title' => 'required',
 			'body' => 'required',
@@ -156,28 +164,35 @@ class PostsController extends Controller
 		]);
 		
 				
-		//Hnadle Cove image
-		\Cloudinary::config(array( 
-			"cloud_name" => "hmxs40u75", 
-			"api_key" => "818238713846353", 
-			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
-		));
-		$temp = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
-		$fileNameToStore = $temp->{'secure_url'};
-		$fileNameToStore2 = $temp->{'public_id'};
-        // Create Post
-        $post = Post::find($id);
+        // Handle File Upload
+        if($request->hasFile('cover_image')){
+			//Hnadle Cove image
+			\Cloudinary::config(array( 
+				"cloud_name" => "hmxs40u75", 
+				"api_key" => "818238713846353", 
+				"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+			));
+			
+			$fileNameToStore = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
+        } else {
+			$fileNameToStore = array('secure_url'=>'https://res.cloudinary.com/hmxs40u75/image/upload/v1507743142/cover_images/no-image_c4wiya.jpg','public_id'=>'cover_images/no-image_c4wiya'); 
+		}
 
+
+		// Create Post
+        $post = Post::find($id);
 
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->destination = $request->input('destination');
         if($request->hasFile('cover_image')){
-			if($post->cover_image != 'no-image.jpg'){
+			if($post->cover_cover_public_id != 'cover_images/no-image_e4gwqf'){
 				// Delete Image
-				Storage::delete('public/cover_images/'.$post->cover_image);
+				$api = new \Cloudinary\Api();
+				$api->delete_resources(array($post->cover_public_id), array("resource_type" => 'image'));
 			}
-			$post->cover_image = $fileNameToStore;
+			$post->cover_image = $fileNameToStore['secure_url'];
+			$post->cover_public_id = $fileNameToStore['public_id'];
 		}
         $post->save();
 		
@@ -199,9 +214,6 @@ class PostsController extends Controller
 				$res->save();
 			}
 		}
-
-		
-
 		
 		return redirect('/posts')->with('success','Post Updated');
 	}
@@ -221,21 +233,25 @@ class PostsController extends Controller
 				return redirect('/posts')->with('error', 'Unauthorized Page');
 			}
         }
-		
-        if($post->cover_image != 'no-image.jpg'){
-            // Delete Image
-            Storage::delete('public/cover_images/'.$post->cover_image);
-        }		
-		
-		Comment::where('post_id', $id)->delete();
-		
+
 		//Delete Res form Cloudinary
 		\Cloudinary::config(array( 
 			"cloud_name" => "hmxs40u75", 
 			"api_key" => "818238713846353", 
 			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
 		));
+	
 		
+        if($post->cover_public_id != 'cover_images/no-image_e4gwqf'){
+            // Delete Image
+			$api = new \Cloudinary\Api();
+		
+			$api->delete_resources(array($post->cover_public_id), array("resource_type" => 'image'));
+        }		
+		
+		Comment::where('post_id', $id)->delete();
+		
+				
 		$api = new \Cloudinary\Api();
 
 		$cRes = CloudinaryRes::where('post_id', $id)->get();

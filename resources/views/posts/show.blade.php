@@ -3,7 +3,8 @@
 @section('content')
     <a href="/posts" class="btn btn-default">Go Back</a>
     <h1>{{$post->title}}</h1>
-    <h6>{{$post->destination}}</h6>
+    <h5>{{$post->destination}}</h5>
+    <h6>{{$post->location}}</h6>
 	
 	<div class='row'>
 		<div class="col-md-6">

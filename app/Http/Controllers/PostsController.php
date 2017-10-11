@@ -55,6 +55,7 @@ class PostsController extends Controller
 			'title' => 'required',
 			'body' => 'required',
 			'destination' => 'required',
+			'location' => 'required',
 			'cover_image' => 'image|nullable|max:1999'
 		]);
 	
@@ -80,6 +81,7 @@ class PostsController extends Controller
 		$post->title = $request->input('title');
 		$post->body = $request->input('body');
 		$post->destination = $request->input('destination');
+		$post->location = $request->input('location');
 		$post->user_id = auth()->user()->id;
 		$post->cover_image = $fileNameToStore['secure_url'];
 		$post->cover_public_id = $fileNameToStore['public_id'];
@@ -160,6 +162,7 @@ class PostsController extends Controller
 			'title' => 'required',
 			'body' => 'required',
 			'destination' => 'required',
+			'location' => 'required',
 			'cover_image' => 'image|nullable|max:1999'
 		]);
 		
@@ -185,6 +188,7 @@ class PostsController extends Controller
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->destination = $request->input('destination');
+        $post->location = $request->input('location');
         if($request->hasFile('cover_image')){
 			if($post->cover_cover_public_id != 'cover_images/no-image_e4gwqf'){
 				// Delete Image

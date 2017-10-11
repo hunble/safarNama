@@ -17,6 +17,10 @@
             {{Form::text('destination', '', ['class' => 'form-control', 'placeholder' => 'Destination'])}}
         </div>
         <div class="form-group">
+            {{Form::label('location', 'Location')}}
+            {{Form::text('location', $post->location, ['class' => 'form-control', 'placeholder' => 'location'])}}
+        </div>
+        <div class="form-group">
             {{Form::label('body', 'Body')}}
             {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
         </div>

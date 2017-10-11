@@ -148,7 +148,8 @@ class UsersController extends Controller
 		$posts =Post::where('user_id',$id)->get();
 		foreach ($posts as $post)
 		{
-			PostsController.destroy($post->id);
+			$post = new PostsController ;
+			$post.destroy($post->id);
 		}
 
 		$user->delete();

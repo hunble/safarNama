@@ -163,7 +163,7 @@ class PostsController extends Controller
 			"api_key" => "818238713846353", 
 			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
 		));
-		$fileNameToStore = json_decode(\Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images')));
+		$fileNameToStore = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
 		$fileNameToStore = $temp2->{'secure_url'};
 		$fileNameToStore2 = $temp2->{'public_id'};
         // Create Post

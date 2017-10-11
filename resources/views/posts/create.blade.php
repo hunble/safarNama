@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             {{Form::label('location', 'Location')}}
-            {{Form::text('location', $post->location, ['class' => 'form-control', 'placeholder' => 'location'])}}
+            {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'location'])}}
         </div>
         <div class="form-group">
             {{Form::label('body', 'Body')}}

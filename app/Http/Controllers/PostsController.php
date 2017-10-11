@@ -65,9 +65,9 @@ class PostsController extends Controller
 			"api_key" => "818238713846353", 
 			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
 		));
-		$fileNameToStore = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
-		$fileNameToStore = $temp2->{'secure_url'};
-		$fileNameToStore2 = $temp2->{'public_id'};
+		$temp = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
+		$fileNameToStore = $temp->{'secure_url'};
+		$fileNameToStore2 = $temp->{'public_id'};
 		
 				
 		$post = new Post;
@@ -162,9 +162,9 @@ class PostsController extends Controller
 			"api_key" => "818238713846353", 
 			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
 		));
-		$fileNameToStore = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
-		$fileNameToStore = $temp2->{'secure_url'};
-		$fileNameToStore2 = $temp2->{'public_id'};
+		$temp = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
+		$fileNameToStore = $temp->{'secure_url'};
+		$fileNameToStore2 = $temp->{'public_id'};
         // Create Post
         $post = Post::find($id);
 

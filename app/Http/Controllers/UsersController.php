@@ -145,13 +145,39 @@ class UsersController extends Controller
             return redirect('/posts')->with('error', 'Unauthorized Page');
         }
 
+				//Delete Res form Cloudinary
+		\Cloudinary::config(array( 
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "818238713846353", 
+			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+		));
+		
 		$posts =Post::where('user_id',$id)->get();
 		foreach ($posts as $post)
 		{
-			$post = new PostsController ;
-			$post.destroy($post->id);
-		}
+		    if($post->cover_public_id != 'cover_images/no-image_e4gwqf'){
+				// Delete Image
+				$api = new \Cloudinary\Api();
+				$api->delete_resources(array($post->cover_public_id), array("resource_type" => 'image'));
+			}		
+		
+			Comment::where('post_id', $post->id)->delete();
+		
+				
+			$api = new \Cloudinary\Api();
+			$cRes = CloudinaryRes::where('post_id', $post->id)->get();
 
+			
+			foreach ($cRes as $cr)
+			{
+				$api->delete_resources(array($cr->public_id), array("resource_type" => $cr->resource_type));	
+			}
+
+		
+			CloudinaryRes::where('post_id', $post->id)->delete();
+		}
+		
+		Post::where('user_id',$id)->delete();
 		$user->delete();
 		return redirect('/users')->with('success','User Deleted');
 	}

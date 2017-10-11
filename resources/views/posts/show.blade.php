@@ -7,7 +7,7 @@
 	
 	<div class='row'>
 		<div class="col-md-6">
-			<img style="width:100%" src="/storage/cover_images/{{$post->cover_image}}">
+			<img style="width:100%" src="{{$post->cover_image}}">
 			<br>
 			<br>
 		</div>

@@ -12,7 +12,8 @@
     <title>{{ config('app.name', 'Travelly') }}</title>
 
     <!-- Styles -->
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 	<style>
 	body { 
 	background: url('http://ringvemedia.com/server/bg.jpg') no-repeat center center fixed; 
@@ -21,7 +22,13 @@
 	  -o-background-size: cover;
 	  background-size: cover;
 	}
-	</style>
+	
+
+	.navbar {
+		background-color: #7a7a7a;
+	}
+
+</style>
 	@include('inc.enlarge_image')
 </head>
 <body >
@@ -34,7 +41,7 @@
     </div>
 	
     <!-- Scripts -->
-    <script src="{{ secure_asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'article-ckeditor' );

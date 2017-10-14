@@ -28,7 +28,7 @@ class PostsController extends Controller
 
     public function index()
     {
-		$posts = Post::orderBy('created_at','desc')->paginate(10);
+		$posts = Post::orderBy('created_at','desc')->paginate(6);
 		
 		return view('posts.index')->with('posts',$posts);
     }
@@ -219,7 +219,7 @@ class PostsController extends Controller
 			}
 		}
 		
-		return redirect('/posts')->with('success','Post Updated');
+		return redirect('/posts/'.$post->id.'/edit')->with('success','Post Updated');
 	}
 
     /**

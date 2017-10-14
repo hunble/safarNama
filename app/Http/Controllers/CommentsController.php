@@ -52,7 +52,7 @@ class CommentsController extends Controller
 		$comment->post_id = $request->input('post_id');
 		$comment->save();
 		
-		return redirect('/posts')->with('success','Comment Posted');    }
+		return redirect('/posts/'.$comment->post_id)->with('success','Comment Posted');    }
 
     /**
      * Display the specified resource.

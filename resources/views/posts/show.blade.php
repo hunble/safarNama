@@ -26,7 +26,7 @@
 		</div>
 	</div><hr>
 	<div class="row">
-		<div class="col-md-4">	
+		<div class="col-md-4 well">	
 				{!!$post->body!!}
 		</div>
 		<div class="col-md-8">

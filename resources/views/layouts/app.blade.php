@@ -13,9 +13,18 @@
 
     <!-- Styles -->
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+	<style>
+	body { 
+	background: url({{secure_asset('storage/backgroung.jpg')}}) no-repeat center center fixed; 
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+	  -o-background-size: cover;
+	  background-size: cover;
+	}
+	</style>
 	@include('inc.enlarge_image')
 </head>
-<body>
+<body >
     <div id="app">
 		@include('inc.navbar')
 		<div class='container'>

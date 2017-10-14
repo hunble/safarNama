@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    <a href="/home" class="btn btn-default">Go Back</a><hr>
 	<div class="row">
 		<div class="col-md-6">
 			<h1>Edit Post</h1>
@@ -46,6 +47,5 @@
 			<!--Images from Cloudinary-->
 			@include('cloudinaryRes.edit')
 		</div>
-
 	</div>
 @endsection

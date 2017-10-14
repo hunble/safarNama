@@ -5,7 +5,7 @@
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 
 
-
+    <a href="/home" class="btn btn-default">Go Back</a><hr>
     <h1>Create Post</h1>
     {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
         <div class="form-group">

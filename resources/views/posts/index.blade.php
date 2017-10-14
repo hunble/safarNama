@@ -3,22 +3,33 @@
 @section('content')
     <h1>Posts</h1>
     @if(count($posts) > 0)
-        @foreach($posts as $post)
-            <div class="well">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4">
-                        <img style="width:100%" src="{{$post->cover_image}}">
-                    </div>
-                    <div class="col-md-8 col-sm-8">
-                        <h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
-                        <h2>{{$post->destination}}</h2>
-                        <h4>{{$post->location}}</h4>
-                        <small>Written on {{$post->created_at}} by {{$post->user->public_name}}</small>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+		<div class="row">
+			@foreach($posts as $post)
+				<div class="col-md-6">
+					<div class="well">
+						<div class="row">
+							<div class="col-md-4 col-sm-4">
+								<img style="width:100%" src="{{$post->cover_image}}">
+							</div>
+							<div class="col-md-8 col-sm-8">
+								<h3><a href="/posts/{{$post->id}}">{{$post->title}}</a></h3>
+								<h2>{{$post->destination}}</h2>
+								<h4>{{$post->location}}</h4>
+								<small>Written on {{$post->created_at}} by {{$post->user->public_name}}</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			@endforeach
+		</div>
+		<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
         {{$posts->links()}}
+		</div>
+		<div class="col-md-4">
+		</div>
     @else
         <p>No posts found</p>
     @endif

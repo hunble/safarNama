@@ -15,6 +15,11 @@
         <style>
             html, body {
                 background-color: #fff;
+				background: url({{asset('storage/backgroung.jpg')}}) no-repeat center center fixed; 
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -80,7 +85,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Travelly
+                    {{ config('app.name', 'Travelly') }}
                 </div>
 
                 <div class="links">

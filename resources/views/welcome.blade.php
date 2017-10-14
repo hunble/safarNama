@@ -15,7 +15,7 @@
         <style>
             html, body {
                 background-color: #fff;
-				background: url({{asset('storage/backgroung.jpg')}}) no-repeat center center fixed; 
+				background: url('http://ringvemedia.com/server/bg.jpg') no-repeat center center fixed; 
 				-webkit-background-size: cover;
 				-moz-background-size: cover;
 				-o-background-size: cover;

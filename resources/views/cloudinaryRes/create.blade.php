@@ -29,10 +29,7 @@
 			{{Form::file('cover_image')}}
         </div>
 		<div class="form-group">
-		<hr>
-		{{Form::label('pv_Res', 'Upload Video and Photo Resources')}}
-		<br>
-		<a href="#" id="upload_widget_opener">Upload multiple images</a>
+			<a href="#" id="upload_widget_opener">Upload multiple images</a>
 		</div>
 		<div id="Added_Resources">
 		</div>

@@ -1,19 +1,17 @@
-@extends('layouts.app')
-
-@section('content')
-    <h1>Create Post</h1>
-    {!! Form::open(['action' => 'PostsController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
-        <div class="form-group">
-            {{Form::label('title', 'Title')}}
-            {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
-        </div>
-        <div class="form-group">
-            {{Form::label('body', 'Body')}}
-            {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
-        </div>
-        <div class="form-group">
-            {{Form::file('cover_image')}}
-        </div>
-        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
-    {!! Form::close() !!}
-@endsection
+<h3>Create Comment</h3>
+{!! Form::open(['action' => 'CommentsController@store', 'method' => 'POST']) !!}
+	<div class="form-group">
+		{{Form::label('Commenter', 'Commentator\'s Name')}}
+		@if(!Auth::guest())
+			{{Form::text('Commenter', Auth::user()->name, ['class' => 'form-control', 'placeholder' => 'Your Name'])}}
+		@else
+			{{Form::text('Commenter', '', ['class' => 'form-control', 'placeholder' => 'Your Name'])}}
+		@endif
+	</div>
+	<div class="form-group">
+		{{Form::label('body', 'Body')}}
+		{{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Your Toughts'])}}
+	</div>
+	{{ Form::hidden('post_id', $post->id) }}
+	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+{!! Form::close() !!}

@@ -15,7 +15,7 @@
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 	<style>
 	body { 
-	background: url({{secure_asset('storage/backgroung.jpg')}}) no-repeat center center fixed; 
+	background: url({{secure_asset('background.jpg')}}) no-repeat center center fixed; 
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
 	  -o-background-size: cover;

@@ -29,10 +29,9 @@
 			{{Form::file('cover_image')}}
         </div>
 		<div class="form-group">
-		<hr>
-		{{Form::label('pv_Res', 'Upload Video and Photo Resources')}}
+            {{Form::label('cover_image', 'Upload Video and Image Resources')}}
 		<br>
-		<a href="#" id="upload_widget_opener">Upload multiple images</a>
+		<a href="#" id="upload_widget_opener">Upload Videos and Images</a>
 		</div>
 		<div id="Added_Resources">
 		</div>
@@ -40,7 +39,7 @@
 		</div>		
 		<div id="Added_Resources_resource_type">
 		</div>
-        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+        {{Form::submit('Submit', ['class'=>'btn btn-primary pull-right'])}}
     {!! Form::close() !!}
 
 @endsection

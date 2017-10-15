@@ -26,7 +26,7 @@
         </div>
         <div class="form-group well">
             {{Form::label('cover_image', 'Cover Image')}}
-			{{Form::file('cover_image')}}
+			{{Form::file('cover_image',['class' => 'btn btn-primary'])}}
         </div>
 		<div class="form-group well">
 			<a href="#" id="upload_widget_opener">Upload multiple images</a>

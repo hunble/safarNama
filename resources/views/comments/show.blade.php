@@ -1,4 +1,3 @@
-<div class="container">
 <h2>Comments</h2>
 @if(count($comments) > 0)
 	@foreach($comments as $comment)
@@ -20,4 +19,3 @@
 @else
 	<p>No comments found</p>
 @endif
-</div>

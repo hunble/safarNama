@@ -13,5 +13,5 @@
 		{{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Your Toughts'])}}
 	</div>
 	{{ Form::hidden('post_id', $post->id) }}
-	{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+	{{Form::submit('Submit', ['class'=>'btn btn-primary pull-right'])}}
 {!! Form::close() !!}

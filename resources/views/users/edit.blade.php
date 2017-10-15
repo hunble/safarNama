@@ -25,6 +25,6 @@
             {{Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password' , 'min' => '8'])}}
         </div>
 		{{Form::hidden('_method','PUT')}}
-        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+        {{Form::submit('Submit', ['class'=>'btn btn-primary pull-right'])}}
     {!! Form::close() !!}
 @endsection

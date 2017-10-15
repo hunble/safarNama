@@ -22,15 +22,15 @@
 					{{Form::label('body', 'Body')}}
 					{{Form::textarea('body', $post->body, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
 				</div>
-				<div class="form-group">
+				<div class="form-group well">
 					{{Form::label('cover_Image', 'Upload Cover Image')}}
 					{{Form::file('cover_image')}}
 				</div>
-				<div class="form-group">
-				<hr>
-				{{Form::label('pv_Res', 'Upload Video and Photo Resources')}}
-				<br>
-				<a href="#" id="upload_widget_opener">Upload multiple images</a>
+				<div class="form-group well">
+					<hr>
+					{{Form::label('pv_Res', 'Upload Video and Photo Resources')}}
+					<br>
+					<a href="#" id="upload_widget_opener">Upload multiple images</a>
 				</div>
 				<div id="Added_Resources">
 				</div>
@@ -40,7 +40,7 @@
 				</div>
 				
 				{{Form::hidden('_method','PUT')}}
-				{{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+				{{Form::submit('Submit', ['class'=>'btn btn-primary pull-right'])}}
 			{!! Form::close() !!}
 		</div>
 		<div class="col-md-6">

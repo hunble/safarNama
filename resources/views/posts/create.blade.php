@@ -24,14 +24,15 @@
             {{Form::label('body', 'Body')}}
             {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
         </div>
-        <div class="form-group">
+        <div class="form-group well">
             {{Form::label('cover_image', 'Cover Image')}}
 			{{Form::file('cover_image')}}
         </div>
-		<div class="form-group">
-            {{Form::label('cover_image', 'Upload Video and Image Resources')}}
-		<br>
-		<a href="#" id="upload_widget_opener">Upload Videos and Images</a>
+		<div class="form-group well">
+			<hr>
+			{{Form::label('pv_Res', 'Upload Video and Photo Resources')}}
+			<br>
+			<a href="#" id="upload_widget_opener">Upload multiple images</a>
 		</div>
 		<div id="Added_Resources">
 		</div>

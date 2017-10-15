@@ -3,7 +3,10 @@
 @section('content')
     <h1>Registered Users</h1>
     @if(count($users) > 0)
+	<div class="row">
         @foreach($users as $user)
+		<div class="col-md-4">
+	
             <div class="well">
                 <div class="row">
 					<h3>{{$user->name}}</h3>
@@ -16,9 +19,11 @@
 					{!!Form::close()!!}
                 </div>
             </div>
+		</div>
         @endforeach
         {{$users->links()}}
-    @else
+    <d/iv>
+	@else
         <p>No users found</p>
     @endif
 @endsection

@@ -22,13 +22,7 @@
 	  -o-background-size: cover;
 	  background-size: cover;
 	}
-	
-
-	.navbar {
-		background-color: #7a7a7a;
-	}
-
-</style>
+	</style>
 	@include('inc.enlarge_image')
 </head>
 <body >

@@ -36,9 +36,13 @@
     <hr>
     <small>Written on {{$post->created_at}} by {{$post->user->public_name}}</small>
 	<hr>
-	@include('comments.show')
-	<hr>
-	@include('comments.create')
-	
+	<div class='row'>
+		<div class='col-md-6'>
+			@include('comments.show')
+		</div>
+		<div class='col-md-6'>
+			@include('comments.create')
+		</div>
+	</div>
 	
 @endsection

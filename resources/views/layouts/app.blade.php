@@ -48,7 +48,7 @@
 	</script>
 	<script type="text/javascript"> 
 	cloudinary.applyUploadWidget(document.getElementById('upload_widget_opener'), 
-	  { upload_preset: 'aodkpzx9', theme: 'purple', button_caption: 'Upload Images and video Resources'}, 
+	  { upload_preset: 'aodkpzx9', theme: 'purple', button_caption: 'Upload Images and video Resources', button_class: 'btn btn-primary'}, 
 	  function(error, result) {console.log(error, result)
 		for (i = 0; i < result.length; i++) { 
 			Added_Resources = document.getElementById('Added_Resources');

@@ -66,10 +66,10 @@ class PostsController extends Controller
         if($request->hasFile('cover_image')){
 			//Hnadle Cove image
 			\Cloudinary::config(array( 
-				"cloud_name" => "hmxs40u75", 
-				"api_key" => "818238713846353", 
-				"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
-			));
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "658451473127219", 
+			"api_secret" => "LrubYx1Dk9PZ45AxpFvZ61ynt_I" 
+		));
 			
 			$fileNameToStore = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
         } else {
@@ -170,11 +170,11 @@ class PostsController extends Controller
         // Handle File Upload
         if($request->hasFile('cover_image')){
 			//Hnadle Cove image
-			\Cloudinary::config(array( 
-				"cloud_name" => "hmxs40u75", 
-				"api_key" => "818238713846353", 
-				"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
-			));
+		\Cloudinary::config(array( 
+			"cloud_name" => "hmxs40u75", 
+			"api_key" => "658451473127219", 
+			"api_secret" => "LrubYx1Dk9PZ45AxpFvZ61ynt_I" 
+		));
 			
 			$fileNameToStore = \Cloudinary\Uploader::upload($request->file('cover_image'),array ('upload_preset'=>'cover_images'));
         } else {
@@ -241,8 +241,8 @@ class PostsController extends Controller
 		//Delete Res form Cloudinary
 		\Cloudinary::config(array( 
 			"cloud_name" => "hmxs40u75", 
-			"api_key" => "818238713846353", 
-			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+			"api_key" => "658451473127219", 
+			"api_secret" => "LrubYx1Dk9PZ45AxpFvZ61ynt_I" 
 		));
 	
 		

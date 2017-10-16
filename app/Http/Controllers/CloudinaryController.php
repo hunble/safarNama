@@ -23,8 +23,8 @@ class CloudinaryController extends Controller
 
 		\Cloudinary::config(array( 
 			"cloud_name" => "hmxs40u75", 
-			"api_key" => "818238713846353", 
-			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+			"api_key" => "658451473127219", 
+			"api_secret" => "LrubYx1Dk9PZ45AxpFvZ61ynt_I" 
 		));
 
 
@@ -110,8 +110,8 @@ class CloudinaryController extends Controller
 		
 		\Cloudinary::config(array( 
 			"cloud_name" => "hmxs40u75", 
-			"api_key" => "818238713846353", 
-			"api_secret" => "NeP1iDcZSQihpWGD-g0XMwbnkUA" 
+			"api_key" => "658451473127219", 
+			"api_secret" => "LrubYx1Dk9PZ45AxpFvZ61ynt_I" 
 		));
 		
 		$api = new \Cloudinary\Api();

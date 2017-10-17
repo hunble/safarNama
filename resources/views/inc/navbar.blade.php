@@ -29,11 +29,9 @@
               <li><a href="/posts">Blog</a></li>
             </ul>
 			<div class="col-sm-3 col-md-3">
-				<form class="navbar-form" role="search">
-				<div class="input-group">
-					<input type="text" list="list_suggestions"     onmouseover="focus();old = value;" 
-    onmousedown = "value = '';" 
-    onmouseup="value = old;" class="form-control" placeholder="Search" name="q" id="q" onkeyup="showResult(this.value)">
+
+				<div class="input-group navbar-form">
+					<input type="text" list="list_suggestions" class="form-control" placeholder="Search" name="q" id="q" onkeyup="showResult(this.value)">
 					<div class="input-group-btn">
 						<button class="btn btn-default" onclick="window.location=document.getElementById('q').value">Go</button>
 					</div>
@@ -41,7 +39,6 @@
 				<datalist id="list_suggestions">
 					<option label="..." value="Loding..."></option>
 				</datalist>
-				</form>
 			</div>
 			
 			

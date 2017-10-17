@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Travelly') }}</title>
 
     <!-- Styles -->
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 	<style>
 	body { 
@@ -35,7 +35,7 @@
     </div>
 	
     <!-- Scripts -->
-    <script src="{{secure_asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'article-ckeditor' );
@@ -125,6 +125,7 @@
 			list_suggestion = document.getElementById("list_suggestions");
 			list_suggestion.innerHTML='';
 			suggestions=JSON.parse(this.responseText)
+
 			i=0;
 			suggestions.forEach(function(suggestion){
 				i++;

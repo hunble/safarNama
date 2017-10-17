@@ -25,6 +25,9 @@ Route::get('/about','PagesController@about');
 Route::get('/services','PagesController@services');
 
 
+Route::get('/search/{q}','PostsController@search');
+
+
 
 Route::resource('posts','PostsController');
 Route::resource('comments','CommentsController');

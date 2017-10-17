@@ -25,10 +25,11 @@
 		<div class="row">
 		<div class="col-md-4">
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4" align="center">
         {{$posts->links()}}
 		</div>
 		<div class="col-md-4">
+		</div>
 		</div>
     @else
         <p>No posts found</p>

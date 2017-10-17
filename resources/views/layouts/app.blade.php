@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Travelly') }}</title>
 
     <!-- Styles -->
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 	<style>
 	body { 
@@ -35,7 +35,7 @@
     </div>
 	
     <!-- Scripts -->
-    <script src="{{ secure_asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'article-ckeditor' );
@@ -99,6 +99,58 @@
 	span.onclick = function() { 
 	modal.style.display = "none";
 	}
+	//Post Search Functionality
+	function showResult(str) {
+	  if (str.length==0) { 
+		document.getElementById("list_suggestions").innerHTML="";
+		option = document.createElement('OPTION');
+		option.setAttribute('value',"Loading...");
+		option.setAttribute('label',"abcdefghijklmopqrestuvwnyz");
+		document.getElementById("list_suggestions").appendChild(option);
+		return;
+	  }
+		document.getElementById("list_suggestions").innerHTML="";
+		option = document.createElement('OPTION');
+		option.setAttribute('value',"Loading...");
+		option.setAttribute('label',"abcdefghijklmopqrestuvwnyz");
+		document.getElementById("list_suggestions").appendChild(option);
+	  if (window.XMLHttpRequest) {
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp=new XMLHttpRequest();
+	  } else {  // code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	  xmlhttp.onreadystatechange=function() {
+		if (this.readyState==4 && this.status==200) {
+			list_suggestion = document.getElementById("list_suggestions");
+			list_suggestion.innerHTML='';
+			suggestions=JSON.parse(this.responseText)
+			i=0;
+			suggestions.forEach(function(suggestion){
+				i++;
+				option = document.createElement('OPTION');
+				link = window.location.origin+'/posts/'+suggestion['id'];
+				option.setAttribute('value',link);
+				option.setAttribute('label',suggestion['title']);
+				list_suggestion.appendChild(option);
+
+			});
+			if(i==0)
+			{
+				document.getElementById("list_suggestions").innerHTML="";
+				option = document.createElement('OPTION');
+				option.setAttribute('value',"No Result Found");
+				option.setAttribute('label',"abcdefghijklmopqrestuvwnyz");
+				document.getElementById("list_suggestions").appendChild(option);
+			}
+				console.log(list_suggestion)
+		}
+	  }
+	  xmlhttp.open("GET",window.location.origin+"/search/"+str,true);
+	  xmlhttp.send();
+	}
+
+	
 	</script>
 </body>
 </html>

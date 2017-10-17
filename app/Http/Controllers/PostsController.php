@@ -23,7 +23,7 @@ class PostsController extends Controller
 	 
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['index', 'show']]);
+        $this->middleware('auth',['except' => ['index', 'show', 'search']]);
     }
 
     public function index()
@@ -272,4 +272,12 @@ class PostsController extends Controller
 		$post->delete();
 		return redirect('/posts')->with('success','Post Deleted');
     }
+	
+	
+	//Search for post    
+	public function search($q)
+	{
+		
+		return $posts = Post::whereRaw('LOWER(title) like ?', '%' .$q. '%')->get();
+	}
 }

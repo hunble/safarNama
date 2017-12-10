@@ -2,40 +2,14 @@
 
 @section('content')
 	<div class="well">
-	<h1>To see the implementation please open &quot;Blog&quot; tab or follow the <big><a href="https://morning-harbor-24095.herokuapp.com/posts">link</a></big></h1>
-		<p><strong>Cloud Computing Assignment, Fall 2017</strong><br />
-			General Instructions:<br />
-			➔ The project is to be done in Heroku PAAS.<br />
-			Objective:</p>
-
+	<h1>To see the implementation please open &quot;Blogs/Vlogs&quot; tab or follow the <big><a href="https://morning-harbor-24095.herokuapp.com/posts">link</a></big></h1>
+		<p><strong>Muhammad Hunble Dhillon</strong><br />
 			<ul>
-				<li>To be able to create, deploy and run a web application in PAAS. We will be using Heroku as PAAS provider.</li>
-				<li>To be able to use Database, Picture and Video upload a service.</li>
+				<li>Student Computer Science, FAST NUCES Lahore</li>
+				<li><a href="hunbledhillon@gmail.com" >hunbledhillon@gmail.com</a></li>
+				<li><a href="l134118@lhr.nu.edu.pk">l134118@lhr.nu.edu.pk</a></li>
+				<li>+92-313-4124-730</li>
 			</ul>
-
-			<p><br />
-			Tasks:</p>
-
-			<ul>
-				<li>Create a web application in which traveller can register and update his/her profile.</li>
-				<li>The traveller should be able to enter the destination Name and location where he/she is going.</li>
-				<li>The traveller should be able to upload pictures.</li>
-				<li>The traveller should be able to upload videos.</li>
-				<li>The traveller&#39;s personal information should be kept hidden, while pictures and videos should be displayed to everyone on the web long with name and location of the destination\tourist spot.</li>
-				<li>&nbsp;If the traveller wishes then he/she can allow his/her name to be shown in public along with pictures and videos.</li>
-				<li>Unregistered users should be able to comments on the pictures or videos.</li>
-				<li>Admin should be able to delete a registered user and the content uploaded by that person.</li>
-				<li>Admin should also be able to delete comments for any item.</li>
-			</ul>
-
-			<p>Note:</p>
-
-			<ol>
-				<li>Use Postgres DB as a service for this project.</li>
-				<li>You can use any addon in Heroku, to give picture upload and video functionality.</li>
-			</ol>
-			
-
 	<div>
 @endsection
 

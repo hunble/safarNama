@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="well">
-	<h1>To see the implementation please open &quot;Blog&quot; tab or follow the <big><a href="https://morning-harbor-24095.herokuapp.com/posts">link</a></big></h1>
+	<h1>To see the implementation please open &quot;Blogs/Vlogs&quot; tab or follow the <big><a href="https://morning-harbor-24095.herokuapp.com/posts">link</a></big></h1>
 		<p><strong>Cloud Computing Assignment, Fall 2017</strong><br />
 			General Instructions:<br />
 			➔ The project is to be done in Heroku PAAS.<br />

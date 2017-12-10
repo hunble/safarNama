@@ -3,7 +3,7 @@
 @section('content')
 	<div class="well">
 	<h1>To see the implementation please open &quot;Blogs/Vlogs&quot; tab or follow the <big><a href="https://morning-harbor-24095.herokuapp.com/posts">link</a></big></h1>
-		<p><strong>Muhammad Hunble Dhillon</strong><br />
+		<h1><strong>Muhammad Hunble Dhillon</strong><h1><br />
 			<ul>
 				<li>Student Computer Science, FAST NUCES Lahore</li>
 				<li><a href="mailto:hunbledhillon@gmail.com" >hunbledhillon@gmail.com</a></li>

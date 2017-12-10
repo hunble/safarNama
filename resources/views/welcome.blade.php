@@ -92,7 +92,7 @@
                     <a href="/about">About</a>
                     <a href="/contact">Contact</a>
                     <a href="/services">Services</a>
-                    <a href="/posts">Blog</a>
+                    <a href="/posts">Blogs/Vlogs</a>
                 </div>
             </div>
         </div>
